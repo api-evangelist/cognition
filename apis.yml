@@ -1,0 +1,152 @@
+aid: cognition
+name: Cognition AI
+description: >-
+  Cognition AI is an applied AI lab building Devin, an autonomous AI software
+  engineer that plans, writes, tests, and ships production code. The company
+  also operates the Windsurf agentic IDE following its 2025 acquisition of the
+  Windsurf team and product. Devin is sold to individual developers, engineering
+  teams, and enterprises as a managed agent that integrates with GitHub, Linear,
+  Slack, Jira, and CI systems to handle migrations, PR review, bug triage,
+  documentation, and scheduled engineering work. Cognition exposes a v3 REST
+  API (Organization and Enterprise scopes) plus a CLI so customers can program
+  Devin into their own workflows. Pricing runs from a free tier through Pro
+  ($20/mo), Max ($200/mo), Teams ($80/seat/mo), and custom Enterprise plans
+  with SAML/OIDC SSO and VPC deployment.
+type: Index
+position: Provider
+access: 3rd-Party
+image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+tags:
+  - Autonomous Agents
+  - AI Software Engineer
+  - Coding Agents
+  - Developer Productivity
+  - DevOps
+  - Code Migration
+  - Code Review
+  - GitHub Integration
+  - Enterprise AI
+  - Agentic Workflows
+  - IDE
+  - LLM Applications
+url: https://raw.githubusercontent.com/api-evangelist/cognition/refs/heads/main/apis.yml
+created: '2026-05-23'
+modified: '2026-05-23'
+specificationVersion: '0.20'
+apis:
+  - aid: cognition:devin-api
+    name: Devin API
+    description: >-
+      The Devin API is a REST interface for creating and managing autonomous
+      engineering sessions, knowledge, playbooks, secrets, and analytics across
+      an organization or enterprise. It lets developers programmatically dispatch
+      Devin to plan, code, test, and ship work, and to retrieve session results
+      for downstream automation. Endpoints are organized into Organization
+      (`/v3/organizations/*`) and Enterprise (`/v3/enterprise/*`) scopes.
+    humanURL: https://docs.devin.ai
+    baseURL: https://api.devin.ai/v3
+    tags:
+      - Devin
+      - Sessions
+      - Agents
+      - Knowledge
+      - Playbooks
+      - Secrets
+      - Audit Logs
+      - Enterprise
+    properties:
+      - type: Documentation
+        url: https://docs.devin.ai
+      - type: GettingStarted
+        url: https://docs.devin.ai/get-started/devin-quickstart
+      - type: SignUp
+        url: https://app.devin.ai/signup
+      - type: APIReference
+        url: https://docs.devin.ai/api-reference/overview
+      - type: Authentication
+        url: https://docs.devin.ai/api-reference/overview
+      - type: CLI
+        url: https://cli.devin.ai/install.sh
+      - type: ReleaseNotes
+        url: https://docs.devin.ai/release-notes/overview
+      - type: Pricing
+        url: https://devin.ai/pricing
+    features:
+      - name: Autonomous Sessions
+        description: Create and manage Devin sessions that plan, code, test, and ship engineering work end to end.
+      - name: Session Attribution
+        description: Use create_as_user_id to start sessions on behalf of other users and surface them in the user's activity.
+      - name: Knowledge Management
+        description: Curate persistent knowledge that Devin uses across sessions to ground decisions in your codebase and standards.
+      - name: Playbooks
+        description: Define reusable playbooks so Devin executes repeatable workflows in a consistent, auditable way.
+      - name: Secrets Management
+        description: Store and rotate credentials Devin uses to access integrations and infrastructure.
+      - name: Enterprise Analytics & Audit Logs
+        description: Cross-organization analytics, audit logs, billing, and user management via the Enterprise API.
+      - name: Role-Based Access Control
+        description: Service user credentials (prefixed cog_) support granular permissions.
+      - name: Slack and Teams Integration
+        description: Tag Devin in chat to dispatch sessions without leaving the conversation.
+    useCases:
+      - name: Large-Scale Code Migrations
+        description: Migrate legacy COBOL, .NET, Talend, or ETL codebases in parallel across many repos.
+      - name: PR Review and Visual QA
+        description: Triage pull requests, identify bugs, and perform browser-based visual QA.
+      - name: Bug Triage and Incident Response
+        description: Investigate incidents, route bug reports, and fix CI failures.
+      - name: Documentation Generation
+        description: Auto-generate documentation and architecture diagrams for legacy codebases.
+      - name: Scheduled Engineering Automation
+        description: Run recurring QA, release notes, and feedback-analysis jobs as scheduled Devin runs.
+    integrations:
+      - name: GitHub
+      - name: Linear
+      - name: Slack
+      - name: Microsoft Teams
+      - name: Jira
+      - name: Confluence
+      - name: Notion
+      - name: Datadog
+      - name: Sentry
+      - name: Stripe
+      - name: AWS
+      - name: Azure
+      - name: Databricks
+      - name: Snowflake
+      - name: MongoDB
+      - name: PostgreSQL
+      - name: MCP
+    authentication:
+      - type: Bearer Token
+        description: Service user credentials prefixed with `cog_` passed as Bearer tokens in the Authorization header. Personal Access Tokens are on the roadmap.
+common:
+  - type: Website
+    url: https://cognition.ai
+  - type: ProductSite
+    url: https://devin.ai
+  - type: Documentation
+    url: https://docs.devin.ai
+  - type: Blog
+    url: https://cognition.ai/blog
+  - type: Research
+    url: https://cognition.ai/research
+  - type: Pricing
+    url: https://devin.ai/pricing
+  - type: SignUp
+    url: https://app.devin.ai/signup
+  - type: Login
+    url: https://app.devin.ai/login
+  - type: Careers
+    url: https://cognition.ai/careers
+  - type: Contact
+    url: https://cognition.ai/contact
+  - type: ReleaseNotes
+    url: https://docs.devin.ai/release-notes/overview
+  - type: LinkedIn
+    url: https://www.linkedin.com/company/cognition-ai-labs
+  - type: Twitter
+    url: https://x.com/cognition
+maintainers:
+  - FN: Kin Lane
+    email: kin@apievangelist.com
