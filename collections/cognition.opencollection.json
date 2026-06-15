@@ -1,0 +1,523 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Devin External API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Sessions",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List all sessions",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.devin.ai/v1/sessions",
+            "params": [
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of sessions to return per page"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Number of sessions to skip for pagination"
+              },
+              {
+                "name": "tags",
+                "value": "",
+                "type": "query",
+                "description": "Filter sessions by tags"
+              }
+            ]
+          },
+          "docs": "Get a paginated list of Devin sessions. The sessions are ordered by creation date\nin descending order (newest first). Each session includes its status, metadata,\nand any structured output from the latest events.\n"
+        },
+        {
+          "info": {
+            "name": "Create a new session",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.devin.ai/v1/sessions",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create a new Devin session. Provide a prompt to describe the task.\nThe session can optionally be made unlisted or idempotent.\n"
+        },
+        {
+          "info": {
+            "name": "Retrieve details about an existing session",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.devin.ai/v1/sessions/:session_id",
+            "params": [
+              {
+                "name": "session_id",
+                "value": "",
+                "type": "path",
+                "description": "The session ID"
+              }
+            ]
+          },
+          "docs": "Get information about the session's current status, timestamps,\nsnapshot/playbook references, and any structured output.\n"
+        },
+        {
+          "info": {
+            "name": "Terminate an existing session",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.devin.ai/v1/sessions/:session_id",
+            "params": [
+              {
+                "name": "session_id",
+                "value": "",
+                "type": "path",
+                "description": "The session ID"
+              }
+            ]
+          },
+          "docs": "Terminate a running Devin session by sending a stop event. This will gracefully\nstop the session and prevent further execution.\n\n**Permission Requirements:**\n- If the `session-write-only-owner` feature flag is enabled for your organization,\n  only the session owner can terminate the session.\n- Otherwise, any user in the organization with access to the session can terminate it.\n\n**Status Validation:**\n- Cannot terminate a session that has already exited (status: \"exit\")\n- Sessions in other states"
+        },
+        {
+          "info": {
+            "name": "Send a message to an existing session",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.devin.ai/v1/sessions/:session_id/message",
+            "params": [
+              {
+                "name": "session_id",
+                "value": "",
+                "type": "path",
+                "description": "The session ID"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Interact with an active Devin session by sending a message. This is\nparticularly useful in sessions waiting for user input or confirmations.\n"
+        },
+        {
+          "info": {
+            "name": "Terminate a session",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.devin.ai/sessions/:session_id",
+            "params": [
+              {
+                "name": "session_id",
+                "value": "",
+                "type": "path",
+                "description": "The session ID to terminate"
+              }
+            ]
+          },
+          "docs": "Terminate an active Devin session. This sends a stop signal to the session,\ncausing it to gracefully shut down. Once terminated, the session cannot be resumed.\n\nNote: Sessions that have already exited cannot be terminated again.\n"
+        },
+        {
+          "info": {
+            "name": "Update session tags",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.devin.ai/v1/sessions/:session_id/tags",
+            "params": [
+              {
+                "name": "session_id",
+                "value": "",
+                "type": "path",
+                "description": "The session ID"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update the tags associated with a Devin session.\n"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Attachments",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Upload files for Devin",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.devin.ai/v1/attachments",
+            "body": {
+              "type": "multipart-form",
+              "data": [
+                {
+                  "name": "file",
+                  "type": "text",
+                  "value": ""
+                }
+              ]
+            }
+          },
+          "docs": "Upload files via multipart/form-data. This endpoint returns a URL\nthat can be referenced in session prompts or other requests.\n"
+        },
+        {
+          "info": {
+            "name": "Download attachment files",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.devin.ai/v1/attachments/:uuid/:name",
+            "params": [
+              {
+                "name": "uuid",
+                "value": "",
+                "type": "path",
+                "description": "The UUID of the attachment"
+              },
+              {
+                "name": "name",
+                "value": "",
+                "type": "path",
+                "description": "The filename of the attachment"
+              }
+            ]
+          },
+          "docs": "Download a previously uploaded attachment file using its UUID and filename.\nThis endpoint returns a redirect to a presigned URL for the file.\n\n**Note for curl users**: Use the `-L` flag to follow the redirect automatically.\n"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Secrets",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List all secrets metadata",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.devin.ai/v1/secrets"
+          },
+          "docs": "Get a list of all secrets metadata. This endpoint only returns non-sensitive\ninformation about the secrets, not the secret values themselves.\n"
+        },
+        {
+          "info": {
+            "name": "Create a new secret",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.devin.ai/v1/secrets",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create a new secret in your organization. The secret value will be encrypted and stored securely.\n"
+        },
+        {
+          "info": {
+            "name": "Delete a secret",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.devin.ai/v1/secrets/:secret_id",
+            "params": [
+              {
+                "name": "secret_id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the secret to delete"
+              }
+            ]
+          },
+          "docs": "Permanently delete a secret by its ID. This action cannot be undone.\n"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Enterprise",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get enterprise consumption data",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.devin.ai/enterprise/consumption",
+            "params": [
+              {
+                "name": "start_date",
+                "value": "",
+                "type": "query",
+                "description": "Start date in ISO format (YYYY-MM-DD)"
+              },
+              {
+                "name": "end_date",
+                "value": "",
+                "type": "query",
+                "description": "End date in ISO format (YYYY-MM-DD)"
+              }
+            ]
+          },
+          "docs": "Retrieve detailed consumption data for an enterprise organization.\nData is filtered by start and end dates in ISO format.\n"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "AuditLogs",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List all audit logs",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.devin.ai/v1/audit-logs",
+            "params": [
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of audit logs to return"
+              },
+              {
+                "name": "before",
+                "value": "",
+                "type": "query",
+                "description": "Filter logs before a specific timestamp"
+              },
+              {
+                "name": "after",
+                "value": "",
+                "type": "query",
+                "description": "Filter logs after a specific timestamp"
+              }
+            ]
+          },
+          "docs": "Get a paginated list of all audit logs for the current organization.\nThe logs are ordered by creation date in descending order (newest first).\n\nAudit logs track various actions across organization management, sessions, API keys, \nsecrets, knowledge management, playbooks, repository management, git integrations, \nenterprise settings, and search operations.\n"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Knowledge",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List knowledge",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.devin.ai/v1/knowledge"
+          },
+          "docs": "Gets all knowledge and folders in your current organization. This endpoint will not return system knowledge (repo indexes or built-in knowledge) managed by Cognition.\n"
+        },
+        {
+          "info": {
+            "name": "Create knowledge",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.devin.ai/v1/knowledge",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create a new piece of knowledge.\n"
+        },
+        {
+          "info": {
+            "name": "Update knowledge",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.devin.ai/v1/knowledge/:note_id",
+            "params": [
+              {
+                "name": "note_id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the knowledge to update"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update the name, body, or trigger of a piece of knowledge.\n"
+        },
+        {
+          "info": {
+            "name": "Delete knowledge",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.devin.ai/v1/knowledge/:note_id",
+            "params": [
+              {
+                "name": "note_id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the knowledge to delete"
+              }
+            ]
+          },
+          "docs": "Permanently delete a piece of knowledge by its ID. This action cannot be undone.\n"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Playbooks",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List playbooks",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.devin.ai/v1/playbooks"
+          },
+          "docs": "Retrieve all team playbooks accessible to your organization. Only team playbooks are returned via the API.\n"
+        },
+        {
+          "info": {
+            "name": "Create playbook",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.devin.ai/v1/playbooks",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create a new team playbook. Requires ManageOrgPlaybooks permission.\n"
+        },
+        {
+          "info": {
+            "name": "Get playbook",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.devin.ai/v1/playbooks/:playbook_id",
+            "params": [
+              {
+                "name": "playbook_id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the playbook to retrieve"
+              }
+            ]
+          },
+          "docs": "Retrieve details of a specific playbook by its ID.\n"
+        },
+        {
+          "info": {
+            "name": "Update playbook",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.devin.ai/v1/playbooks/:playbook_id",
+            "params": [
+              {
+                "name": "playbook_id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the playbook to update"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update an existing team playbook. Requires ManageOrgPlaybooks permission.\nOnly team playbooks can be updated.\n"
+        },
+        {
+          "info": {
+            "name": "Delete playbook",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.devin.ai/v1/playbooks/:playbook_id",
+            "params": [
+              {
+                "name": "playbook_id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the playbook to delete"
+              }
+            ]
+          },
+          "docs": "Delete a team playbook. Requires ManageOrgPlaybooks permission.\nThis marks the playbook as deleted and removes any associated macro.\n"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
