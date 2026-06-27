@@ -59,7 +59,7 @@ apis:
         url: https://docs.devin.ai
       - type: GettingStarted
         url: https://docs.devin.ai/get-started/devin-quickstart
-      - type: SignUp
+      - type: Signup
         url: https://app.devin.ai/signup
       - type: APIReference
         url: https://docs.devin.ai/api-reference/overview
@@ -133,7 +133,7 @@ common:
     url: https://cognition.ai/research
   - type: Pricing
     url: https://devin.ai/pricing
-  - type: SignUp
+  - type: Signup
     url: https://app.devin.ai/signup
   - type: Login
     url: https://app.devin.ai/login
