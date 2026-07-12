@@ -121,6 +121,14 @@ apis:
       - type: Bearer Token
         description: Service user credentials prefixed with `cog_` passed as Bearer tokens in the Authorization header. Personal Access Tokens are on the roadmap.
 common:
+  - type: TrustCenter
+    url: security/cognition-trust-center.yml
+  - type: VulnerabilityDisclosure
+    url: security/cognition-vulnerability-disclosure.yml
+  - type: DomainSecurity
+    url: security/cognition-domain-security.yml
+  - type: Authentication
+    url: authentication/cognition-authentication.yml
   - type: Website
     url: https://cognition.ai
   - type: ProductSite
