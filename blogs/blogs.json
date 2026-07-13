@@ -2,13 +2,14 @@
   "repo": "cognition",
   "feeds": [
     {
-      "source": "https://cognition.ai/blog",
-      "feed_url": "",
+      "source": "https://docs.devin.ai",
+      "feed_url": "https://docs.devin.ai",
+      "title": "",
       "saved": 0,
-      "method": "agent-scrape"
+      "method": "none"
     }
   ],
-  "post_count": 2,
-  "fetched": "2026-06-27T12:33:57Z",
-  "agent_pulled": "2026-06-27"
+  "post_count": 5,
+  "fetched": "2026-07-11T11:50:51Z",
+  "agent_pulled": "2026-07-04"
 }
