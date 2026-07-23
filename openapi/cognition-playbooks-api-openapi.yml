@@ -1,0 +1,285 @@
+openapi: 3.1.0
+info:
+  title: Devin External Attachments Playbooks API
+  version: 1.0.0
+  description: 'The Devin External API enables you to programmatically create and interact with Devin sessions. This RESTful API allows you to integrate Devin into your own applications, automate workflows, and build powerful tools on top of Devin.
+
+    **Note**: The External API is currently in alpha. While we strive to maintain backward compatibility, some endpoints may change as we improve the API.
+
+    '
+servers:
+- url: https://api.devin.ai
+  description: Devin Production Server
+security:
+- bearerAuth: []
+tags:
+- name: Playbooks
+  description: Operations for managing playbooks
+paths:
+  /v1/playbooks:
+    get:
+      tags:
+      - Playbooks
+      summary: List playbooks
+      description: 'Retrieve all team playbooks accessible to your organization. Only team playbooks are returned via the API.
+
+        '
+      responses:
+        '200':
+          description: List of playbooks
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/PlaybookResponse'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '403':
+          $ref: '#/components/responses/ForbiddenError'
+    post:
+      tags:
+      - Playbooks
+      summary: Create playbook
+      description: 'Create a new team playbook. Requires ManageOrgPlaybooks permission.
+
+        '
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreatePlaybookRequest'
+      responses:
+        '200':
+          description: Playbook created successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PlaybookResponse'
+        '400':
+          $ref: '#/components/responses/BadRequestError'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '403':
+          $ref: '#/components/responses/ForbiddenError'
+  /v1/playbooks/{playbook_id}:
+    get:
+      tags:
+      - Playbooks
+      summary: Get playbook
+      description: 'Retrieve details of a specific playbook by its ID.
+
+        '
+      parameters:
+      - name: playbook_id
+        in: path
+        required: true
+        description: The ID of the playbook to retrieve
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Playbook details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PlaybookResponse'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '404':
+          $ref: '#/components/responses/NotFoundError'
+    put:
+      tags:
+      - Playbooks
+      summary: Update playbook
+      description: 'Update an existing team playbook. Requires ManageOrgPlaybooks permission.
+
+        Only team playbooks can be updated.
+
+        '
+      parameters:
+      - name: playbook_id
+        in: path
+        required: true
+        description: The ID of the playbook to update
+        schema:
+          type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreatePlaybookRequest'
+      responses:
+        '200':
+          description: Playbook updated successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    example: success
+        '400':
+          $ref: '#/components/responses/BadRequestError'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '403':
+          $ref: '#/components/responses/ForbiddenError'
+        '404':
+          $ref: '#/components/responses/NotFoundError'
+    delete:
+      tags:
+      - Playbooks
+      summary: Delete playbook
+      description: 'Delete a team playbook. Requires ManageOrgPlaybooks permission.
+
+        This marks the playbook as deleted and removes any associated macro.
+
+        '
+      parameters:
+      - name: playbook_id
+        in: path
+        required: true
+        description: The ID of the playbook to delete
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Playbook deleted successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    example: success
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '403':
+          $ref: '#/components/responses/ForbiddenError'
+        '404':
+          $ref: '#/components/responses/NotFoundError'
+components:
+  responses:
+    NotFoundError:
+      description: Resource not found
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              detail:
+                type: string
+                example: The requested resource does not exist
+    ForbiddenError:
+      description: Forbidden - User does not have permission to access the resource
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              detail:
+                type: string
+                example: You do not have permission to access this resource
+    BadRequestError:
+      description: Bad Request
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              detail:
+                type: string
+                example: Invalid input or request
+    UnauthorizedError:
+      description: Unauthorized - Invalid or missing API key
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              detail:
+                type: string
+                example: Missing or invalid Authorization header
+  schemas:
+    CreatePlaybookRequest:
+      type: object
+      description: Request body for creating or updating a playbook
+      properties:
+        title:
+          type: string
+          minLength: 1
+          description: The title of the playbook
+        body:
+          type: string
+          minLength: 1
+          description: The content/instructions of the playbook
+        macro:
+          type: string
+          nullable: true
+          description: Optional macro shortcut for the playbook (e.g., !deploy)
+      required:
+      - title
+      - body
+    PlaybookResponse:
+      type: object
+      description: Response object for playbook operations
+      properties:
+        playbook_id:
+          type: string
+          description: Unique identifier for the playbook
+        title:
+          type: string
+          description: The title of the playbook
+        body:
+          type: string
+          description: The content/instructions of the playbook
+        status:
+          type: string
+          description: Status of the playbook (published, deleted, etc.)
+        access_type:
+          type: string
+          description: Access level of the playbook (team, community, etc.)
+        org_id:
+          type: string
+          description: Organization ID that owns the playbook
+        created_at:
+          type: string
+          format: date-time
+          description: When the playbook was created
+        updated_at:
+          type: string
+          format: date-time
+          description: When the playbook was last updated
+        created_by_user_id:
+          type: string
+          nullable: true
+          description: ID of the user who created the playbook
+        created_by_user_name:
+          type: string
+          nullable: true
+          description: Name of the user who created the playbook
+        updated_by_user_id:
+          type: string
+          nullable: true
+          description: ID of the user who last updated the playbook
+        updated_by_user_name:
+          type: string
+          nullable: true
+          description: Name of the user who last updated the playbook
+        macro:
+          type: string
+          nullable: true
+          description: Optional macro shortcut for the playbook
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+externalDocs:
+  description: Visit Devin's documentation page for more info
+  url: https://docs.devin.ai

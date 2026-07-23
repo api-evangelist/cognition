@@ -1,0 +1,149 @@
+openapi: 3.1.0
+info:
+  title: Devin External Attachments API
+  version: 1.0.0
+  description: 'The Devin External API enables you to programmatically create and interact with Devin sessions. This RESTful API allows you to integrate Devin into your own applications, automate workflows, and build powerful tools on top of Devin.
+
+    **Note**: The External API is currently in alpha. While we strive to maintain backward compatibility, some endpoints may change as we improve the API.
+
+    '
+servers:
+- url: https://api.devin.ai
+  description: Devin Production Server
+security:
+- bearerAuth: []
+tags:
+- name: Attachments
+  description: Operations for file uploads
+paths:
+  /v1/attachments:
+    post:
+      tags:
+      - Attachments
+      summary: Upload files for Devin
+      description: 'Upload files via multipart/form-data. This endpoint returns a URL
+
+        that can be referenced in session prompts or other requests.
+
+        '
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                file:
+                  type: string
+                  format: binary
+                  description: The file to upload
+            encoding:
+              file:
+                contentType: application/octet-stream
+      responses:
+        '200':
+          description: File successfully uploaded
+          content:
+            text/plain:
+              schema:
+                type: string
+                description: A string URL where the uploaded file can be accessed
+              example: https://storage.devin.ai/attachments/xxx/file.py
+        '400':
+          $ref: '#/components/responses/BadRequestError'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+  /v1/attachments/{uuid}/{name}:
+    get:
+      tags:
+      - Attachments
+      summary: Download attachment files
+      description: 'Download a previously uploaded attachment file using its UUID and filename.
+
+        This endpoint returns a redirect to a presigned URL for the file.
+
+
+        **Note for curl users**: Use the `-L` flag to follow the redirect automatically.
+
+        '
+      parameters:
+      - name: uuid
+        in: path
+        required: true
+        description: The UUID of the attachment
+        schema:
+          type: string
+      - name: name
+        in: path
+        required: true
+        description: The filename of the attachment
+        schema:
+          type: string
+      responses:
+        '307':
+          description: Temporary redirect to presigned URL for file download
+          headers:
+            Location:
+              description: The presigned URL for downloading the file
+              schema:
+                type: string
+                format: uri
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '404':
+          description: Attachment not found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  detail:
+                    type: string
+                    example: Attachment not found
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+      x-codeSamples:
+      - lang: curl
+        source: "# Note: -L flag is required to follow the 307 redirect\ncurl -L -X GET \"https://api.devin.ai/v1/attachments/{uuid}/{name}\" \\\n  -H \"Authorization: Bearer YOUR_API_KEY\" \\\n  -o \"downloaded_file.ext\"\n"
+components:
+  responses:
+    InternalServerError:
+      description: Internal Server Error
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              detail:
+                type: string
+                example: Something went wrong
+    BadRequestError:
+      description: Bad Request
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              detail:
+                type: string
+                example: Invalid input or request
+    UnauthorizedError:
+      description: Unauthorized - Invalid or missing API key
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              detail:
+                type: string
+                example: Missing or invalid Authorization header
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+externalDocs:
+  description: Visit Devin's documentation page for more info
+  url: https://docs.devin.ai
