@@ -13,9 +13,22 @@ description: >-
   ($20/mo), Max ($200/mo), Teams ($80/seat/mo), and custom Enterprise plans
   with SAML/OIDC SSO and VPC deployment.
 type: Index
+accessModel:
+  pricing: free
+  onboarding: self-serve
+  trial: false
+  try_now: true
+  public: false
+  label: Free · Self-serve signup
+  confidence: high
+  source:
+  - plans
+  - authentication
+  generated: '2026-07-22'
+  method: derived
 position: Provider
 access: 3rd-Party
-image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/cognition.png
 tags:
   - Autonomous Agents
   - AI Software Engineer
@@ -34,92 +47,170 @@ created: '2026-05-23'
 modified: '2026-05-23'
 specificationVersion: '0.20'
 apis:
-  - aid: cognition:devin-api
-    name: Devin API
+- aid: cognition:devin-api
+  name: Devin API
+  description: >-
+    The Devin API is a REST interface for creating and managing autonomous engineering sessions, knowledge,
+    playbooks, secrets, and analytics across an organization or enterprise. It lets developers programmatically
+    dispatch Devin to plan, code, test, and ship work, and to retrieve session results for downstream
+    automation. Endpoints are organized into Organization (`/v3/organizations/*`) and Enterprise (`/v3/enterprise/*`)
+    scopes.
+  humanURL: https://docs.devin.ai
+  baseURL: https://api.devin.ai/v3
+  tags:
+  - Devin
+  - Sessions
+  - Agents
+  - Knowledge
+  - Playbooks
+  - Secrets
+  - Audit Logs
+  - Enterprise
+  properties:
+  - type: Documentation
+    url: https://docs.devin.ai
+  - type: GettingStarted
+    url: https://docs.devin.ai/get-started/devin-quickstart
+  - type: Signup
+    url: https://app.devin.ai/signup
+  - type: APIReference
+    url: https://docs.devin.ai/api-reference/overview
+  - type: Authentication
+    url: https://docs.devin.ai/api-reference/overview
+  - type: CLI
+    url: https://cli.devin.ai/install.sh
+  - type: ReleaseNotes
+    url: https://docs.devin.ai/release-notes/overview
+  - type: Pricing
+    url: https://devin.ai/pricing
+  features:
+  - name: Autonomous Sessions
     description: >-
-      The Devin API is a REST interface for creating and managing autonomous
-      engineering sessions, knowledge, playbooks, secrets, and analytics across
-      an organization or enterprise. It lets developers programmatically dispatch
-      Devin to plan, code, test, and ship work, and to retrieve session results
-      for downstream automation. Endpoints are organized into Organization
-      (`/v3/organizations/*`) and Enterprise (`/v3/enterprise/*`) scopes.
-    humanURL: https://docs.devin.ai
-    baseURL: https://api.devin.ai/v3
-    tags:
-      - Devin
-      - Sessions
-      - Agents
-      - Knowledge
-      - Playbooks
-      - Secrets
-      - Audit Logs
-      - Enterprise
-    properties:
-      - type: Documentation
-        url: https://docs.devin.ai
-      - type: GettingStarted
-        url: https://docs.devin.ai/get-started/devin-quickstart
-      - type: Signup
-        url: https://app.devin.ai/signup
-      - type: APIReference
-        url: https://docs.devin.ai/api-reference/overview
-      - type: Authentication
-        url: https://docs.devin.ai/api-reference/overview
-      - type: CLI
-        url: https://cli.devin.ai/install.sh
-      - type: ReleaseNotes
-        url: https://docs.devin.ai/release-notes/overview
-      - type: Pricing
-        url: https://devin.ai/pricing
-    features:
-      - name: Autonomous Sessions
-        description: Create and manage Devin sessions that plan, code, test, and ship engineering work end to end.
-      - name: Session Attribution
-        description: Use create_as_user_id to start sessions on behalf of other users and surface them in the user's activity.
-      - name: Knowledge Management
-        description: Curate persistent knowledge that Devin uses across sessions to ground decisions in your codebase and standards.
-      - name: Playbooks
-        description: Define reusable playbooks so Devin executes repeatable workflows in a consistent, auditable way.
-      - name: Secrets Management
-        description: Store and rotate credentials Devin uses to access integrations and infrastructure.
-      - name: Enterprise Analytics & Audit Logs
-        description: Cross-organization analytics, audit logs, billing, and user management via the Enterprise API.
-      - name: Role-Based Access Control
-        description: Service user credentials (prefixed cog_) support granular permissions.
-      - name: Slack and Teams Integration
-        description: Tag Devin in chat to dispatch sessions without leaving the conversation.
-    useCases:
-      - name: Large-Scale Code Migrations
-        description: Migrate legacy COBOL, .NET, Talend, or ETL codebases in parallel across many repos.
-      - name: PR Review and Visual QA
-        description: Triage pull requests, identify bugs, and perform browser-based visual QA.
-      - name: Bug Triage and Incident Response
-        description: Investigate incidents, route bug reports, and fix CI failures.
-      - name: Documentation Generation
-        description: Auto-generate documentation and architecture diagrams for legacy codebases.
-      - name: Scheduled Engineering Automation
-        description: Run recurring QA, release notes, and feedback-analysis jobs as scheduled Devin runs.
-    integrations:
-      - name: GitHub
-      - name: Linear
-      - name: Slack
-      - name: Microsoft Teams
-      - name: Jira
-      - name: Confluence
-      - name: Notion
-      - name: Datadog
-      - name: Sentry
-      - name: Stripe
-      - name: AWS
-      - name: Azure
-      - name: Databricks
-      - name: Snowflake
-      - name: MongoDB
-      - name: PostgreSQL
-      - name: MCP
-    authentication:
-      - type: Bearer Token
-        description: Service user credentials prefixed with `cog_` passed as Bearer tokens in the Authorization header. Personal Access Tokens are on the roadmap.
+      Create and manage Devin sessions that plan, code, test, and ship engineering work end to end.
+  - name: Session Attribution
+    description: >-
+      Use create_as_user_id to start sessions on behalf of other users and surface them in the user's
+      activity.
+  - name: Knowledge Management
+    description: >-
+      Curate persistent knowledge that Devin uses across sessions to ground decisions in your codebase
+      and standards.
+  - name: Playbooks
+    description: >-
+      Define reusable playbooks so Devin executes repeatable workflows in a consistent, auditable way.
+  - name: Secrets Management
+    description: Store and rotate credentials Devin uses to access integrations and infrastructure.
+  - name: Enterprise Analytics & Audit Logs
+    description: >-
+      Cross-organization analytics, audit logs, billing, and user management via the Enterprise API.
+  - name: Role-Based Access Control
+    description: Service user credentials (prefixed cog_) support granular permissions.
+  - name: Slack and Teams Integration
+    description: Tag Devin in chat to dispatch sessions without leaving the conversation.
+  useCases:
+  - name: Large-Scale Code Migrations
+    description: Migrate legacy COBOL, .NET, Talend, or ETL codebases in parallel across many repos.
+  - name: PR Review and Visual QA
+    description: Triage pull requests, identify bugs, and perform browser-based visual QA.
+  - name: Bug Triage and Incident Response
+    description: Investigate incidents, route bug reports, and fix CI failures.
+  - name: Documentation Generation
+    description: Auto-generate documentation and architecture diagrams for legacy codebases.
+  - name: Scheduled Engineering Automation
+    description: Run recurring QA, release notes, and feedback-analysis jobs as scheduled Devin runs.
+  integrations:
+  - name: GitHub
+  - name: Linear
+  - name: Slack
+  - name: Microsoft Teams
+  - name: Jira
+  - name: Confluence
+  - name: Notion
+  - name: Datadog
+  - name: Sentry
+  - name: Stripe
+  - name: AWS
+  - name: Azure
+  - name: Databricks
+  - name: Snowflake
+  - name: MongoDB
+  - name: PostgreSQL
+  - name: MCP
+  authentication:
+  - type: Bearer Token
+    description: >-
+      Service user credentials prefixed with `cog_` passed as Bearer tokens in the Authorization header.
+      Personal Access Tokens are on the roadmap.
+- aid: cognition:cognition-attachments-api
+  name: Cognition AI Attachments API
+  description: Operations for file uploads
+  humanURL: https://docs.devin.ai
+  baseURL: https://api.devin.ai/v3
+  tags:
+  - Attachments
+  properties:
+  - type: OpenAPI
+    url: openapi/cognition-attachments-api-openapi.yml
+- aid: cognition:cognition-auditlogs-api
+  name: Cognition AI AuditLogs API
+  description: Operations for managing audit logs
+  humanURL: https://docs.devin.ai
+  baseURL: https://api.devin.ai/v3
+  tags:
+  - AuditLogs
+  properties:
+  - type: OpenAPI
+    url: openapi/cognition-auditlogs-api-openapi.yml
+- aid: cognition:cognition-enterprise-api
+  name: Cognition AI Enterprise API
+  description: Operations for enterprise-specific features and reporting
+  humanURL: https://docs.devin.ai
+  baseURL: https://api.devin.ai/v3
+  tags:
+  - Enterprise
+  properties:
+  - type: OpenAPI
+    url: openapi/cognition-enterprise-api-openapi.yml
+- aid: cognition:cognition-knowledge-api
+  name: Cognition AI Knowledge API
+  description: Operations for managing knowledge
+  humanURL: https://docs.devin.ai
+  baseURL: https://api.devin.ai/v3
+  tags:
+  - Knowledge
+  properties:
+  - type: OpenAPI
+    url: openapi/cognition-knowledge-api-openapi.yml
+- aid: cognition:cognition-playbooks-api
+  name: Cognition AI Playbooks API
+  description: Operations for managing playbooks
+  humanURL: https://docs.devin.ai
+  baseURL: https://api.devin.ai/v3
+  tags:
+  - Playbooks
+  properties:
+  - type: OpenAPI
+    url: openapi/cognition-playbooks-api-openapi.yml
+- aid: cognition:cognition-secrets-api
+  name: Cognition AI Secrets API
+  description: Operations for managing secrets and credentials
+  humanURL: https://docs.devin.ai
+  baseURL: https://api.devin.ai/v3
+  tags:
+  - Secrets
+  properties:
+  - type: OpenAPI
+    url: openapi/cognition-secrets-api-openapi.yml
+- aid: cognition:cognition-sessions-api
+  name: Cognition AI Sessions API
+  description: Operations for creating and managing Devin sessions
+  humanURL: https://docs.devin.ai
+  baseURL: https://api.devin.ai/v3
+  tags:
+  - Sessions
+  properties:
+  - type: OpenAPI
+    url: openapi/cognition-sessions-api-openapi.yml
 common:
   - type: AgenticAccess
     url: agentic-access/cognition-agentic-access.yml
