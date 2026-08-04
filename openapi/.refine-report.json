@@ -1,0 +1,26 @@
+{
+  "provider": "cognition",
+  "sources": [
+    "cognition-attachments-api-openapi.yml",
+    "cognition-auditlogs-api-openapi.yml",
+    "cognition-enterprise-api-openapi.yml",
+    "cognition-knowledge-api-openapi.yml",
+    "cognition-playbooks-api-openapi.yml",
+    "cognition-secrets-api-openapi.yml",
+    "cognition-sessions-api-openapi.yml"
+  ],
+  "outputs": [
+    "cognition-attachments-api-openapi.yml",
+    "cognition-auditlogs-api-openapi.yml",
+    "cognition-enterprise-api-openapi.yml",
+    "cognition-knowledge-api-openapi.yml",
+    "cognition-playbooks-api-openapi.yml",
+    "cognition-secrets-api-openapi.yml",
+    "cognition-sessions-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [],
+  "warnings": [],
+  "notes": [],
+  "skipped": []
+}
