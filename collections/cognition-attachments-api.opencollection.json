@@ -1,0 +1,70 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Devin External Attachments API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Attachments",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Upload files for Devin",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.devin.ai/v1/attachments",
+            "body": {
+              "type": "multipart-form",
+              "data": [
+                {
+                  "name": "file",
+                  "type": "text",
+                  "value": ""
+                }
+              ]
+            }
+          },
+          "docs": "Upload files via multipart/form-data. This endpoint returns a URL\nthat can be referenced in session prompts or other requests.\n"
+        },
+        {
+          "info": {
+            "name": "Download attachment files",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.devin.ai/v1/attachments/:uuid/:name",
+            "params": [
+              {
+                "name": "uuid",
+                "value": "",
+                "type": "path",
+                "description": "The UUID of the attachment"
+              },
+              {
+                "name": "name",
+                "value": "",
+                "type": "path",
+                "description": "The filename of the attachment"
+              }
+            ]
+          },
+          "docs": "Download a previously uploaded attachment file using its UUID and filename.\nThis endpoint returns a redirect to a presigned URL for the file.\n\n**Note for curl users**: Use the `-L` flag to follow the redirect automatically.\n"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

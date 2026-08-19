@@ -1,0 +1,408 @@
+{
+  "item": [
+    {
+      "id": "385abbfa-377b-4f34-b3ce-fd591723c2aa",
+      "name": "Enterprise",
+      "description": {
+        "content": "Operations for enterprise-specific features and reporting",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "2c9967c4-8c4a-4864-8985-a1442b30cca8",
+          "name": "Get enterprise consumption data",
+          "request": {
+            "name": "Get enterprise consumption data",
+            "description": {
+              "content": "Retrieve detailed consumption data for an enterprise organization.\nData is filtered by start and end dates in ISO format.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "enterprise",
+                "consumption"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "start_date",
+                  "value": "<date>",
+                  "description": "(Required) Start date in ISO format (YYYY-MM-DD)"
+                },
+                {
+                  "disabled": false,
+                  "key": "end_date",
+                  "value": "<date>",
+                  "description": "(Required) End date in ISO format (YYYY-MM-DD)"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "a9f0f7f1-bd5b-4919-99da-ef2442aeb67c",
+              "name": "Enterprise consumption data",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "enterprise",
+                    "consumption"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "start_date",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "end_date",
+                      "value": "<date>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"sessions\": [\n    {\n      \"user_name\": \"John Doe\",\n      \"user_email\": \"john.doe@example.com\",\n      \"session_name\": \"Create portfolio website\",\n      \"created_at\": \"2024-11-15T14:32:18.456789+00:00\",\n      \"acu_used\": 2.4567891234567893,\n      \"url\": \"https://app.devin.ai/sessions/f8e9d7c6b5a4321098765432109876543\",\n      \"org_id\": \"org-a1b2c3d4e5f6789012345678901234567\",\n      \"org_name\": \"Example Organization\",\n      \"pull_requests\": [\n        {\n          \"pr_url\": \"https://github.com/example/repo/pull/6\",\n          \"pr_status\": \"open\"\n        },\n        {\n          \"pr_url\": \"https://github.com/example/repo/pull/6\",\n          \"pr_status\": \"open\"\n        }\n      ]\n    },\n    {\n      \"user_name\": \"John Doe\",\n      \"user_email\": \"john.doe@example.com\",\n      \"session_name\": \"Create portfolio website\",\n      \"created_at\": \"2024-11-15T14:32:18.456789+00:00\",\n      \"acu_used\": 2.4567891234567893,\n      \"url\": \"https://app.devin.ai/sessions/f8e9d7c6b5a4321098765432109876543\",\n      \"org_id\": \"org-a1b2c3d4e5f6789012345678901234567\",\n      \"org_name\": \"Example Organization\",\n      \"pull_requests\": [\n        {\n          \"pr_url\": \"https://github.com/example/repo/pull/6\",\n          \"pr_status\": \"open\"\n        },\n        {\n          \"pr_url\": \"https://github.com/example/repo/pull/6\",\n          \"pr_status\": \"open\"\n        }\n      ]\n    }\n  ],\n  \"cycle\": {\n    \"start\": \"2025-07-01\",\n    \"end\": \"2025-07-31\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ff8bc51c-791a-4e50-9592-cebd6addef1b",
+              "name": "Bad Request - Invalid date format",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "enterprise",
+                    "consumption"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "start_date",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "end_date",
+                      "value": "<date>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": \"Invalid date format. Dates must be in ISO format (YYYY-MM-DD)\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ba8c1fca-8694-4e6c-9ff9-d681573824a7",
+              "name": "Unauthorized - Invalid or missing API key",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "enterprise",
+                    "consumption"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "start_date",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "end_date",
+                      "value": "<date>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": \"Missing or invalid Authorization header\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d625b06d-7256-45c2-bedf-cbc0f6798acc",
+              "name": "Forbidden - Consumption API not enabled",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "enterprise",
+                    "consumption"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "start_date",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "end_date",
+                      "value": "<date>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": \"Contact support to enable the consumption API\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "05f6d2e7-c90c-4295-b0a5-4d307e505f86",
+              "name": "Resource not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "enterprise",
+                    "consumption"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "start_date",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "end_date",
+                      "value": "<date>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": \"The requested resource does not exist\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f6c4cb31-31e6-4077-bdef-0fcffd700920",
+              "name": "Internal Server Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "enterprise",
+                    "consumption"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "start_date",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "end_date",
+                      "value": "<date>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": \"Something went wrong\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.devin.ai",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "fceca274-a3dc-46f2-85d8-697f81e9f6e4",
+    "name": "Devin External Attachments Enterprise API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Devin External API enables you to programmatically create and interact with Devin sessions. This RESTful API allows you to integrate Devin into your own applications, automate workflows, and build powerful tools on top of Devin.\n**Note**: The External API is currently in alpha. While we strive to maintain backward compatibility, some endpoints may change as we improve the API.\n",
+      "type": "text/plain"
+    }
+  }
+}

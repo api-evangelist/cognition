@@ -1,0 +1,49 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Devin External Attachments Enterprise API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Enterprise",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get enterprise consumption data",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.devin.ai/enterprise/consumption",
+            "params": [
+              {
+                "name": "start_date",
+                "value": "",
+                "type": "query",
+                "description": "Start date in ISO format (YYYY-MM-DD)"
+              },
+              {
+                "name": "end_date",
+                "value": "",
+                "type": "query",
+                "description": "End date in ISO format (YYYY-MM-DD)"
+              }
+            ]
+          },
+          "docs": "Retrieve detailed consumption data for an enterprise organization.\nData is filtered by start and end dates in ISO format.\n"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

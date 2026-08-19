@@ -1,0 +1,55 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Devin External Attachments AuditLogs API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "AuditLogs",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List all audit logs",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.devin.ai/v1/audit-logs",
+            "params": [
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of audit logs to return"
+              },
+              {
+                "name": "before",
+                "value": "",
+                "type": "query",
+                "description": "Filter logs before a specific timestamp"
+              },
+              {
+                "name": "after",
+                "value": "",
+                "type": "query",
+                "description": "Filter logs after a specific timestamp"
+              }
+            ]
+          },
+          "docs": "Get a paginated list of all audit logs for the current organization.\nThe logs are ordered by creation date in descending order (newest first).\n\nAudit logs track various actions across organization management, sessions, API keys, \nsecrets, knowledge management, playbooks, repository management, git integrations, \nenterprise settings, and search operations.\n"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,92 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Devin External Attachments Knowledge API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Knowledge",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List knowledge",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.devin.ai/v1/knowledge"
+          },
+          "docs": "Gets all knowledge and folders in your current organization. This endpoint will not return system knowledge (repo indexes or built-in knowledge) managed by Cognition.\n"
+        },
+        {
+          "info": {
+            "name": "Create knowledge",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.devin.ai/v1/knowledge",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create a new piece of knowledge.\n"
+        },
+        {
+          "info": {
+            "name": "Update knowledge",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.devin.ai/v1/knowledge/:note_id",
+            "params": [
+              {
+                "name": "note_id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the knowledge to update"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update the name, body, or trigger of a piece of knowledge.\n"
+        },
+        {
+          "info": {
+            "name": "Delete knowledge",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.devin.ai/v1/knowledge/:note_id",
+            "params": [
+              {
+                "name": "note_id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the knowledge to delete"
+              }
+            ]
+          },
+          "docs": "Permanently delete a piece of knowledge by its ID. This action cannot be undone.\n"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
