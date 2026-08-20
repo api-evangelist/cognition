@@ -157,6 +157,8 @@ apis:
   humanURL: https://docs.devin.ai
   baseURL: https://api.devin.ai/v3
   tags:
+  - Audit Logs
+  tags_raw:
   - AuditLogs
   properties:
   - type: OpenAPI
